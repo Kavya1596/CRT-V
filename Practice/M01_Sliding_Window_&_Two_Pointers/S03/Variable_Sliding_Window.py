@@ -19,7 +19,7 @@ print(minSubArrayLen(target,nums))
 
 
 leetcode:- 713
-'''
+
 from typing import List 
 def numSubarrayProductLessThanK(nums: List[int], k: int) -> int:
         left=0
@@ -35,3 +35,23 @@ def numSubarrayProductLessThanK(nums: List[int], k: int) -> int:
 nums = [10,5,2,6]
 k = 100
 print(numSubarrayProductLessThanK(nums,k))
+
+
+leetcode:- 904
+'''
+from typing import List
+def totalFruit(fruits: List[int]) -> int:
+        left=0
+        ans=0
+        freq={}
+        for right in range(len(fruits)):
+            freq[fruits[right]]=freq.get(fruits[right],0)+1
+            while len(freq)>2:
+                freq[fruits[left]]-=1
+                if freq[fruits[left]]==0:
+                    del freq[fruits[left]]
+                left+=1
+            ans=max(ans,right-left+1)
+        return ans
+fruits = [1,2,3,2,2]
+print(totalFruit(fruits))

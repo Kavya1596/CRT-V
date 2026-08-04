@@ -51,3 +51,24 @@ print(numOfSubarrays(arr,k,threshold))
 
 leetcode 1456:-
 '''
+from typing import List
+def maxVowels(s: str, k: int) -> int:
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+    current_vowels = sum(1 for i in range(k) if s[i] in vowels)
+    max_vowels = current_vowels
+    for i in range(k, len(s)):
+        if s[i] in vowels:
+            current_vowels += 1
+        if s[i - k] in vowels:
+            current_vowels -= 1
+            
+        if current_vowels > max_vowels:
+            max_vowels = current_vowels
+                
+        if max_vowels == k:
+            return k
+                
+    return max_vowels
+s = "abciiidef"
+k = 3
+print(maxVowels(s,k))
